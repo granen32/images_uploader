@@ -1,7 +1,12 @@
 import React from "react";
+import UploadFileForm from "./UploadFileForm/index";
 
 function App() {
-  return <h2>사진첩</h2>;
+  return (
+    <>
+      <UploadFileForm />
+    </>
+  );
 }
 
 export default App;
