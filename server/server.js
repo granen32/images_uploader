@@ -4,6 +4,8 @@ const multer = require("multer");
 const { v4: uuid } = require("uuid");
 const mime = require("mime-types");
 const mogoose = require("mongoose");
+const Image = require("./models/Image");
+
 // multer 저장경로 및 네임 설정
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, "./uploads"),
@@ -28,7 +30,6 @@ const upload = multer({
 
 const app = express();
 const PORT = 5001;
-console.log(process.env);
 mogoose
   .connect(
     process.env.MONGO_URL,
@@ -42,16 +43,24 @@ mogoose
     // 몽고 db가 연결되고 나서 서버가 연결됨
     // uploads 폴더에 접근 가능하게 하기
     app.use("/uploads", express.static("uploads"));
-
     // 라우터 만들기 이미지 업로드
     // 함수 인자로 리퀘스트 바디 리스폰스 바디
-    app.post("/upload", upload.single("image"), (req, res) => {
+    app.post("/uploads", upload.single("image"), async (req, res) => {
       // 이 경로로 포스트 메시지를 보냄
       // 미들웨어 중간처리 과정
-      console.log(req.file);
+      // 비동기 처리 어싱크로 보내면 어웨잇 기다려라 결과가 나오기 전까지
+      await new Image({
+        key: req.file.filename,
+        originalFileName: req.file.originalname,
+      }).save();
       res.json(req.file);
+      console.log("됐냐");
     });
-
+    app.get("/uploads", async (req, res) => {
+      const images = await Image.find();
+      res.json(images);
+      // 프라미스 리턴
+    });
     app.listen(PORT, () => console.log("express on server.js" + PORT));
     console.log("mongDb connected.");
   })
