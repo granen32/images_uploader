@@ -3,6 +3,20 @@ import styled from "styled-components";
 export const ImagesWrap = styled.div`
   width: 500px;
   margin: 0 auto;
+  .images_preview {
+    width: 0%;
+    margin: 10px auto 20px;
+    border-radius: 10px;
+    font-size: 0;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
+  .images_preview_show {
+    width: 75%;
+    transition: 0.3s all;
+  }
 `;
 export const ImagesSeleted = styled.div`
   height: 200px;

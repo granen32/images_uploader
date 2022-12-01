@@ -4,19 +4,22 @@ import * as S from "./style";
 import { toast } from "react-toastify";
 import ProGressBar from "./ProGressBar/index";
 const UploadFileForm = () => {
+  const defaultFileName = "이미지 파일을 업로드 해주세요";
   const [files, setFile] = useState<File>();
-  const [fileName, setFileName] =
-    useState<string>("이미지 파일을 업로드 해주세요");
+  const [imgSrc, setImgSrc] = useState<string | undefined>();
+  const [fileName, setFileName] = useState<string>(defaultFileName);
   const [percent, setPercent] = useState(0);
   const imageSelectdHandler = (evnet: React.ChangeEvent<HTMLInputElement>) => {
     const target = evnet.currentTarget;
     const files = (target.files as FileList)[0];
-
     if (files === undefined) {
       return;
     }
     setFile(files);
     setFileName(files.name);
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(files);
+    fileReader.onload = (event: any) => setImgSrc(event.target?.result);
   };
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,9 +34,17 @@ const UploadFileForm = () => {
           },
         });
         console.log({ res });
+        setTimeout(() => {
+          setPercent(0);
+          setFileName(defaultFileName);
+          setImgSrc(undefined);
+        }, 3000);
         toast.success("success");
       } catch (error) {
         toast.error("error");
+        setPercent(0);
+        setFileName(defaultFileName);
+        setImgSrc(undefined);
       }
     }
   };
@@ -41,6 +52,10 @@ const UploadFileForm = () => {
     <>
       <S.ImagesWrap>
         <h2>사진첩</h2>
+        <div className={`images_preview ${imgSrc && "images_preview_show"}`}>
+          <img src={imgSrc} alt="이미지" />
+        </div>
+
         <ProGressBar percent={percent} />
 
         <form action="" onSubmit={onSubmit}>
@@ -50,6 +65,7 @@ const UploadFileForm = () => {
               type="file"
               id="image"
               multiple
+              accept="image/*"
               onChange={imageSelectdHandler}
             />
           </S.ImagesSeleted>

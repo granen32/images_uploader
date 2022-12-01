@@ -5,7 +5,17 @@ interface Props {
 }
 
 const ProGressBar: FC<Props> = ({ percent }) => {
-  return <S.ProGressBarWrap>ProGress Bar{percent}</S.ProGressBarWrap>;
+  return (
+    <S.ProGressBarWrap>
+      <div
+        style={{
+          width: `${percent}%`,
+        }}
+      >
+        {percent}
+      </div>
+    </S.ProGressBarWrap>
+  );
 };
 
 export default ProGressBar;
