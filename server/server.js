@@ -45,18 +45,18 @@ mogoose
     app.use("/uploads", express.static("uploads"));
     // 라우터 만들기 이미지 업로드
     // 함수 인자로 리퀘스트 바디 리스폰스 바디
-    app.post("/uploads", upload.single("image"), async (req, res) => {
+    app.post("/images", upload.single("image"), async (req, res) => {
       // 이 경로로 포스트 메시지를 보냄
       // 미들웨어 중간처리 과정
       // 비동기 처리 어싱크로 보내면 어웨잇 기다려라 결과가 나오기 전까지
-      await new Image({
+      const image = await new Image({
         key: req.file.filename,
         originalFileName: req.file.originalname,
       }).save();
-      res.json(req.file);
+      res.json(image);
       console.log("됐냐");
     });
-    app.get("/uploads", async (req, res) => {
+    app.get("/images", async (req, res) => {
       const images = await Image.find();
       res.json(images);
       // 프라미스 리턴
