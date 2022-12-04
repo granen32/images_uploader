@@ -24,11 +24,10 @@ const ImageList = () => {
       .catch((err) => console.log(err));
   }, []);
   const ImageListWrap: FC<ImageListWrap> = () => {
-    const imageList = images;
     return (
       <S.ImageListBox>
         <h3>Image List</h3>
-        {imageList.map((el, _) => (
+        {images.map((el, _) => (
           <img
             src={`http://localhost:5001/uploads/${el.key}`}
             key={el.key}

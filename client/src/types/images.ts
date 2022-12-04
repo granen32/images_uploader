@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface ImageListWrap {
   _id?: string;
   key?: string;
@@ -5,3 +7,8 @@ export interface ImageListWrap {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export type ImageListWrapContextType = {
+  images?: ImageListWrap[];
+  children?: ReactNode | undefined;
+};

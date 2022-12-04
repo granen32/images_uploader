@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ImagesWrap = styled.div`
-  width: 500px;
+  width: 600px;
   margin: 0 auto;
   .images_preview {
     width: 0%;
