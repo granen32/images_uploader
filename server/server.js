@@ -54,7 +54,7 @@ mogoose
         originalFileName: req.file.originalname,
       }).save();
       res.json(image);
-      console.log("됐냐");
+      console.log(image);
     });
     app.get("/images", async (req, res) => {
       const images = await Image.find();
