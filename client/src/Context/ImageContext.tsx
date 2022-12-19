@@ -14,7 +14,7 @@ export const ImageContext = React.createContext<
 export const ImageProvider: FunctionComponent<ImageListWrapContextType> = (
   props
 ) => {
-  const [images, setImages] = useState<ImageListWrap[]>([]);
+  const [images, setImages] = useState<ImageListWrapContextType>();
   // 자식요소의 value를 넘길수있음
   useEffect(() => {
     axios
@@ -26,7 +26,7 @@ export const ImageProvider: FunctionComponent<ImageListWrapContextType> = (
       .catch((err) => console.log(err));
   }, []);
   return (
-    <ImageContext.Provider value={{ images, setImages }}>
+    <ImageContext.Provider value={[{ images, setImages }]}>
       {props.children}
     </ImageContext.Provider>
   );

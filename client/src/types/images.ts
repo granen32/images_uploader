@@ -9,7 +9,7 @@ export interface ImageListWrap {
 }
 
 export type ImageListWrapContextType = {
-  images?: ImageListWrap[];
+  images?: ImageListWrap[] | undefined;
   children?: ReactNode | undefined;
   setImages: React.Dispatch<React.SetStateAction<ImageListWrap[]>>;
 };
