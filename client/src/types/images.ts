@@ -11,4 +11,5 @@ export interface ImageListWrap {
 export type ImageListWrapContextType = {
   images?: ImageListWrap[];
   children?: ReactNode | undefined;
+  setImages: React.Dispatch<React.SetStateAction<ImageListWrap[]>>;
 };

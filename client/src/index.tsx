@@ -8,7 +8,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <ImageProvider>
+      <GlobalStyle />
+      <App />
+    </ImageProvider>
   </React.StrictMode>
 );
