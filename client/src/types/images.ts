@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export interface ImageListWrap {
   _id?: string;
@@ -11,5 +11,4 @@ export interface ImageListWrap {
 export type ImageListWrapContextType = {
   images?: ImageListWrap[] | undefined;
   children?: ReactNode | undefined;
-  setImages: React.Dispatch<React.SetStateAction<ImageListWrap[]>>;
 };

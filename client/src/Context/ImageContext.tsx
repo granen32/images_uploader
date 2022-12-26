@@ -1,21 +1,30 @@
+import axios from "axios";
 import React, {
   createContext,
   FunctionComponent,
   useEffect,
   useState,
 } from "react";
-import { ImageListWrap, ImageListWrapContextType } from "../types/images";
-import axios from "axios";
+import { ImageListWrapContextType } from "../types/images";
 
-export const ImageContext = React.createContext<
-  ImageListWrapContextType | undefined
->(undefined);
+export type ImageListWrap = {
+  _id?: string;
+  key?: string;
+  originalFileName?: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
 
-export const ImageProvider: FunctionComponent<ImageListWrapContextType> = (
-  props
-) => {
-  const [images, setImages] = useState<ImageListWrapContextType>();
-  // 자식요소의 value를 넘길수있음
+type ImageListWrapState = ImageListWrap[];
+
+export const ImageContext = createContext<ImageListWrapState | undefined>(
+  undefined
+);
+
+export const ImageContextProvide: FunctionComponent<
+  ImageListWrapContextType
+> = (prop) => {
+  const [images, setImages] = useState<ImageListWrap[]>([]);
   useEffect(() => {
     axios
       .get("/images")
@@ -26,8 +35,8 @@ export const ImageProvider: FunctionComponent<ImageListWrapContextType> = (
       .catch((err) => console.log(err));
   }, []);
   return (
-    <ImageContext.Provider value={[{ images, setImages }]}>
-      {props.children}
+    <ImageContext.Provider value={images}>
+      {prop.children}
     </ImageContext.Provider>
   );
 };
