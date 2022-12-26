@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { ImageListWrapContextType, ImageListWrap } from "../types/images";
 
-export const ImageContext = createContext<ImageListWrapContextType[] | null>(
+export const ImageContext = createContext<ImageListWrapContextType | null>(
   null
 );
 export const ImageContextProvide = ({
@@ -11,6 +11,7 @@ export const ImageContextProvide = ({
   children: React.ReactNode;
 }) => {
   const [images, setImages] = useState<ImageListWrapContextType | null>(null);
+  console.log(images);
   useEffect(() => {
     axios
       .get("/images")
@@ -22,8 +23,6 @@ export const ImageContextProvide = ({
     console.log(images);
   }, []);
   return (
-    <ImageContext.Provider value={[images, setImages]}>
-      {children}
-    </ImageContext.Provider>
+    <ImageContext.Provider value={images}>{children}</ImageContext.Provider>
   );
 };
