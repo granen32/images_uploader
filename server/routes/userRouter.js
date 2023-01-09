@@ -1,8 +1,9 @@
 const userRouter = require("express").Router();
-
-userRouter.post("/register", (req, res) => {
-  console.log(req.body);
-  res.json({ message: "user Register" });
+const User = require("../models/User");
+userRouter.post("/register", async (req, res) => {
+  await new User(req.body).save();
+  // promise를 리턴해줌
+  res.json({ message: "user registered" });
 });
 
 module.exports = { userRouter };
