@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, require: true },
     // 유니크 설정시 동일한 항목을 필터해줌
     username: { type: String, require: true, unique: true },
-    password: { type: String, require: true },
+    hashedPassWord: { type: String, require: true },
   },
   { timestamps: true }
 );
