@@ -1,18 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema(
   {
-    name: { type: String, require: true },
-    // 유니크 설정시 동일한 항목을 필터해줌
-    username: { type: String, require: true, unique: true },
-    hashedPassWord: { type: String, require: true },
+    name: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
+    hashedPassword: { type: String, required: true },
     sessions: [
       {
-        createedAt: { type: Date, required: true },
+        createdAt: { type: Date, required: true },
       },
     ],
   },
   { timestamps: true }
-);
-// 유저 모델 생성
-module.exports = mongoose.model("user", UserSchema);
+)
+
+module.exports = mongoose.model('user', UserSchema)
