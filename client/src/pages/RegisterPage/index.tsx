@@ -14,9 +14,6 @@ const RegisterPage = () => {
               setName(e.target.value)
             }
           />
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
         </form>
       </S.RegisterContainer>
     </>
