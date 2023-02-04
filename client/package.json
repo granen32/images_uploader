@@ -15,6 +15,7 @@
     "mongoose": "^6.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
@@ -46,5 +47,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5001/"
+  "proxy": "http://localhost:5001/",
+  "devDependencies": {
+    "install": "^0.13.0",
+    "tailwindcss": "^3.2.4"
+  }
 }

@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import * as S from "./style";
-import { ImageContext } from "../../Context/ImageContext";
+import { ImageContext } from "../../context/ImageContext";
 interface ImageListWrap {
   _id?: string;
   key?: string;
