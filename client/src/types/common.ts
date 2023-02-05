@@ -1,5 +1,6 @@
-export interface CustomInput {
+export interface CustomInputType {
   value: string;
   label: string;
-  setVaule: React.ChangeEvent<HTMLInputElement>;
+  type: string | undefined;
+  setVaule: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -1,12 +1,24 @@
-import React from "react";
-import { CustomInput } from "../types/common";
-const CustomInput = ({ label, value, setVaule }: CustomInput) => {
+import React, { FC } from "react";
+import { CustomInputType } from "../types/common";
+import * as S from "./common";
+const CustomInput: FC<CustomInputType> = ({
+  label,
+  value,
+  setVaule,
+  type = "text",
+}) => {
   return (
     <>
-      <div>
-        <label htmlFor="">{label}</label>
-        <input type="text" value={value} />
-      </div>
+      <S.InputCommon>
+        <S.CommonInput
+          type={type}
+          value={value}
+          onChange={(e) => setVaule(e.target.value)}
+          required
+        />
+        <S.CommonLabel htmlFor={label}>{label}</S.CommonLabel>
+        <span></span>
+      </S.InputCommon>
     </>
   );
 };
