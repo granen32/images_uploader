@@ -17,7 +17,6 @@ export const ImageContextProvide = ({
       .get("/images")
       .then((result) => {
         setImages(result.data);
-        console.log(typeof result);
       })
       .catch((err) => console.log(err));
     console.log(images);

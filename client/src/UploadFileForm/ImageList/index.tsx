@@ -20,7 +20,6 @@ const ImageList = () => {
       .get("/images")
       .then((result) => {
         setImages(result.data);
-        console.log(typeof result);
       })
       .catch((err) => console.log(err));
   }, []);
