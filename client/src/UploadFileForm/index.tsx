@@ -1,58 +1,58 @@
-import axios from "axios";
-import React, { useState } from "react";
-import * as S from "./style";
-import { toast } from "react-toastify";
-import ProGressBar from "./ProGressBar/index";
+import axios from 'axios'
+import React, { useState } from 'react'
+import * as S from './style'
+import { toast } from 'react-toastify'
+import ProGressBar from './ProGressBar/index'
 const UploadFileForm = () => {
-  const defaultFileName = "이미지 파일을 업로드 해주세요";
-  const [files, setFile] = useState<File>();
-  const [imgSrc, setImgSrc] = useState<string | undefined>();
-  const [fileName, setFileName] = useState<string>(defaultFileName);
-  const [percent, setPercent] = useState(0);
+  const defaultFileName = '이미지 파일을 업로드 해주세요'
+  const [files, setFile] = useState<File>()
+  const [imgSrc, setImgSrc] = useState<string | undefined>()
+  const [fileName, setFileName] = useState<string>(defaultFileName)
+  const [percent, setPercent] = useState(0)
   const imageSelectdHandler = (evnet: React.ChangeEvent<HTMLInputElement>) => {
-    const target = evnet.currentTarget;
-    const files = (target.files as FileList)[0];
+    const target = evnet.currentTarget
+    const files = (target.files as FileList)[0]
     if (files === undefined) {
-      return;
+      return
     }
-    setFile(files);
-    setFileName(files.name);
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(files);
-    fileReader.onload = (event: any) => setImgSrc(event.target?.result);
-  };
+    setFile(files)
+    setFileName(files.name)
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(files)
+    fileReader.onload = (event: any) => setImgSrc(event.target?.result)
+  }
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData();
+    event.preventDefault()
+    const formData = new FormData()
     if (files) {
-      formData.append("image", files);
+      formData.append('image', files)
       try {
-        const res = await axios.post("/images", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
+        const res = await axios.post('/images', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
           onUploadProgress: (event: any) => {
-            setPercent(Math.round((100 * event.loaded) / event.total));
+            setPercent(Math.round((100 * event.loaded) / event.total))
           },
-        });
-        console.log({ res });
+        })
+        console.log({ res })
         setTimeout(() => {
-          setPercent(0);
-          setFileName(defaultFileName);
-          setImgSrc(undefined);
-        }, 3000);
-        toast.success("success");
+          setPercent(0)
+          setFileName(defaultFileName)
+          setImgSrc(undefined)
+        }, 3000)
+        toast.success('success')
       } catch (error) {
-        toast.error("error");
-        setPercent(0);
-        setFileName(defaultFileName);
-        setImgSrc(undefined);
+        toast.error('error')
+        setPercent(0)
+        setFileName(defaultFileName)
+        setImgSrc(undefined)
       }
     }
-  };
+  }
   return (
     <>
       <S.ImagesWrap>
         <h2>사진첩</h2>
-        <div className={`images_preview ${imgSrc && "images_preview_show"}`}>
+        <div className={`images_preview ${imgSrc && 'images_preview_show'}`}>
           <img src={imgSrc} alt="이미지" />
         </div>
 
@@ -73,7 +73,7 @@ const UploadFileForm = () => {
         </form>
       </S.ImagesWrap>
     </>
-  );
-};
+  )
+}
 
-export default UploadFileForm;
+export default UploadFileForm
