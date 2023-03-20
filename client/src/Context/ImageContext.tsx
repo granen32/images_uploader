@@ -1,16 +1,29 @@
 import axios from 'axios'
 import React, { createContext, useEffect, useState } from 'react'
-import { ImageListWrapContextType, ImageListWrap } from '../types/images'
+import { ImageListWrapContextType, ImageListWrapProps } from '../types/images'
 
-export const ImageContext = createContext<ImageListWrapContextType | undefined>(
-  undefined
-)
+const defaultState = [
+  {
+    _id: '',
+    key: '',
+    originalFileName: '',
+    createdAt: '',
+    updatedAt: '',
+  },
+]
+
+export const ImageContext = createContext<ImageListWrapContextType>({
+  images: defaultState,
+  setImages: () => {
+    return null
+  },
+})
 export const ImageContextProvide = ({
   children,
 }: {
   children: React.ReactNode
 }) => {
-  const [images, setImages] = useState<ImageListWrap[]>()
+  const [images, setImages] = useState<ImageListWrapProps[]>()
   useEffect(() => {
     axios
       .get('/images')
@@ -21,7 +34,7 @@ export const ImageContextProvide = ({
     console.log(images)
   }, [])
   return (
-    <ImageContext.Provider value={[images, setImages]}>
+    <ImageContext.Provider value={{ images, setImages }}>
       {children}
     </ImageContext.Provider>
   )

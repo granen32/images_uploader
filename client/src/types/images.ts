@@ -1,4 +1,4 @@
-export interface ImageListWrap {
+export interface ImageListWrapProps {
   _id: string
   key: string
   originalFileName: string
@@ -6,7 +6,7 @@ export interface ImageListWrap {
   updatedAt: string
 }
 
-export type ImageListWrapContextType = [
-  ImageListWrap[] | undefined,
-  (image: ImageListWrap[]) => void
-]
+export type ImageListWrapContextType = {
+  images: ImageListWrapProps[] | undefined
+  setImages: (image: ImageListWrapProps[]) => void
+}
