@@ -1,27 +1,28 @@
-import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
-import { ImageListWrapContextType, ImageListWrap } from "../types/images";
+import axios from 'axios'
+import React, { createContext, useEffect, useState } from 'react'
+import { ImageListWrapContextType, ImageListWrap } from '../types/images'
 
-export const ImageContext = createContext<
-  ImageListWrapContextType[] | undefined
->([]);
+export const ImageContext = createContext<ImageListWrapContextType | undefined>(
+  undefined
+)
 export const ImageContextProvide = ({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) => {
-  const [images, setImages] = useState<ImageListWrapContextType[]>([]);
-  console.log(images);
+  const [images, setImages] = useState<ImageListWrap[]>()
   useEffect(() => {
     axios
-      .get("/images")
-      .then((result) => {
-        setImages(result.data);
+      .get('/images')
+      .then(result => {
+        setImages(result.data)
       })
-      .catch((err) => console.log(err));
-    console.log(images);
-  }, []);
+      .catch(err => console.log(err))
+    console.log(images)
+  }, [])
   return (
-    <ImageContext.Provider value={images}>{children}</ImageContext.Provider>
-  );
-};
+    <ImageContext.Provider value={[images, setImages]}>
+      {children}
+    </ImageContext.Provider>
+  )
+}

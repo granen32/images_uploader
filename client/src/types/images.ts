@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 export interface ImageListWrap {
   _id: string
   key: string
@@ -9,9 +7,6 @@ export interface ImageListWrap {
 }
 
 export type ImageListWrapContextType = [
-  {
-    images: ImageListWrap[]
-    children: ReactNode
-    setImages: (image: ImageListWrap) => void
-  }
+  ImageListWrap[] | undefined,
+  (image: ImageListWrap[]) => void
 ]
