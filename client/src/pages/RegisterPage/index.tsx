@@ -3,7 +3,6 @@ import * as S from "./style";
 import CustomInput from "../../common/CustomInput";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { AuthContext } from "../../context/AuthContext";
 const RegisterPage = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
@@ -29,7 +28,6 @@ const RegisterPage = () => {
       console.error(err);
     }
   };
-  useEffect(() => {}, []);
   return (
     <>
       <S.RegisterContainer>

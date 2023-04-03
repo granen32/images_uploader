@@ -31,7 +31,6 @@ export const ImageContextProvide = ({
         setImages(result.data);
       })
       .catch((err) => console.log(err));
-    console.log(images);
   }, []);
   return (
     <ImageContext.Provider value={{ images, setImages }}>
